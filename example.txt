@@ -1,3 +1,0 @@
-Overwritten content.
-New line added.
-Adding more content with r+ mode.
