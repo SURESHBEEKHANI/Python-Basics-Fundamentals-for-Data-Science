@@ -45,7 +45,8 @@ def process_text(request: TextRequest):
     # If uppercase is True, convert text to uppercase
     processed_text = text.upper() if request.uppercase else text
     
-    return TextResponse(processed=processed_text, length=len(processed_text))
+    response=TextResponse(processed=processed_text, length=len(processed_text))
+    return response
 
 # Endpoint to get the length of the text
 if __name__ == "__main__":
