@@ -1,6 +1,8 @@
+# Import BaseModel from Pydantic for data validation and serialization
 from pydantic import BaseModel
 
 
+# Define Address model for nested serialization
 class Address(BaseModel):
     """
     Represents an address with street, city, state, and postal code.
@@ -11,6 +13,7 @@ class Address(BaseModel):
     postal_code: str
 
 
+# Define Patient model with nested Address
 class Patient(BaseModel):
     """
     Represents a patient with personal and medical information.
@@ -21,6 +24,7 @@ class Patient(BaseModel):
     address: Address
 
 
+# Function to print all details of a Patient instance, including nested address
 def print_patient_details(patient: Patient) -> None:
     """
     Prints the details of a Patient instance, including nested address.
@@ -50,7 +54,22 @@ patient_data = {
     "address": address_data
 }
 
+# Create Patient instance from dictionary
 patient1 = Patient(**patient_data)
 
-# Print all values of the patient using the print_patient_details function
-print_patient_details(patient1)
+# Demonstrate Pydantic serialization methods
+# model_dump returns a dict representation of the model
+# model_dump_json returns a JSON string, with options to include/exclude fields
+# exclude_unset only includes fields that were set
+temp = patient1.model_dump  # Reference to the model_dump method (not called)
+temp2 = patient1.model_dump_json(exclude=["name", "age"])  # JSON without name and age
+temp3 = patient1.model_dump_json(include=["name", "age"])  # JSON with only name and age
+temp4 = patient1.model_dump_json(exclude_unset=True)  # JSON with only set fields
+
+# Print the various serialization outputs
+print(temp2)
+print(temp3)
+print(temp4)
+print(temp)  # This will print the method object, not the data
+print(type(temp))
+print(type(temp2))
