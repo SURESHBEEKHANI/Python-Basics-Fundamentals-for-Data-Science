@@ -1,5 +1,4 @@
-# .gitignore for Python projects
-.venv/
+/.venv/
 /__pycache__/
 *.pyc
 uv.lock
